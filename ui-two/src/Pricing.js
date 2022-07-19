@@ -21,6 +21,7 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import CountUp from 'react-countup';
 import { useEffect, useState } from "react";
+import myData from './data.json';
 
 function Copyright(props) {
   return (
@@ -148,6 +149,10 @@ function PricingContent() {
   const handleButton = () => {
     setIdealCity(matchCities(idealSalary, idealJobTitle));
   }
+
+  useEffect(() => {
+    console.log(myData)
+  });
 
   return (
     <React.Fragment>
