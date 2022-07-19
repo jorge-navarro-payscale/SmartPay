@@ -1,0 +1,16 @@
+.basic-form {
+    display: block;
+    text-align: center;
+    margin: auto;
+}
+
+.basic-input {
+    display: block;
+    margin: auto;
+    margin-bottom: 25px;
+}
+
+.special-label {
+    color: red;
+    padding-right: 20px;
+}

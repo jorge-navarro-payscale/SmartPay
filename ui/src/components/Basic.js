@@ -1,9 +1,10 @@
 import React from 'react';
 import { Formik } from 'formik';
+import "./Basic.css"
 
 const Basic = () => (
-  <div>
-    <h1 style={{textAlign: "center"}}>Anywhere in your app!</h1>
+  <div className="basic-form">
+    <h1 style={{textAlign: "center"}}>SmartPay Report</h1>
     <Formik
       initialValues={{ email: '', password: '' }}
       validate={values => {
@@ -36,21 +37,50 @@ const Basic = () => (
       }) => (
         <form onSubmit={handleSubmit}>
           <input
-            type="email"
-            name="email"
+            className='basic-input'
+            type="text"
+            placeholder='Job Title'
+            name="jobtitle"
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.email}
           />
           {errors.email && touched.email && errors.email}
           <input
-            type="password"
-            name="password"
+            className='basic-input'
+            type="date"
+            placeholder='Start Date'
+            name="startdate"
             onChange={handleChange}
             onBlur={handleBlur}
-            value={values.password}
+            value={values.email}
           />
-          {errors.password && touched.password && errors.password}
+          {errors.email && touched.email && errors.email}
+          <div className='basic-input'>
+            <label className='special-label'>
+              End Date:
+              <input
+                type="date"
+                name="enddate"
+                placeholder='End Date'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.password}
+              />
+            </label>
+          </div>
+          <div className='basic-input'>
+            <label>
+              Was this a promotion?
+              <input
+                type="checkbox"
+                name="ispromotion"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.email}
+              />
+            </label>
+          </div>
           <button type="submit" disabled={isSubmitting}>
             Submit
           </button>
