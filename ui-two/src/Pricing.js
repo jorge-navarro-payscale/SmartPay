@@ -75,6 +75,24 @@ const tiers = [
   },
 ];
 
+const cities = [
+  {
+    jobTitle: 'Software Engineer',
+    city: 'Boston',
+    salary: '50000'
+  },
+  {
+    jobTitle: 'Software Engineer',
+    city: 'Philadelphia',
+    salary: '80000'
+  },
+  {
+    jobTitle: 'Software Developer',
+    city: 'Detroit',
+    salary: '150000'
+  }
+];
+
 const footers = [
   {
     title: 'Company',
@@ -102,14 +120,33 @@ const footers = [
 
 function PricingContent() {
   const [salary, setSalary] = useState(0);
-  const [idealCity, setIdealCity] = useState('');
+  const [idealSalary, setIdealSalary] = useState(0);
+  const [idealJobTitle, setIdealJobTitle] = useState('unknown');
+  const [idealCity, setIdealCity] = useState('unknown');
 
   const handleSalaryChange = (event) => {
     setSalary(event.target.value);
   }
 
+  const handleIdealJobTitle = (event) => {
+    setIdealJobTitle(event.target.value);
+  }
+
+  const handleIdealSalary = (event) => {
+    setIdealSalary(event.target.value);
+  }
+
+  const matchCities = (idealSalary, idealJobTitle) => {
+    const filtered = cities.filter(obj => obj.jobTitle == idealJobTitle && parseInt(obj.salary) >= idealSalary);
+    if (filtered.length > 0) {
+      return filtered[0].city;
+    } else {
+      return 'unknown';
+    }
+  }
+
   const handleButton = () => {
-    setIdealCity('Boston');
+    setIdealCity(matchCities(idealSalary, idealJobTitle));
   }
 
   return (
@@ -174,7 +211,7 @@ function PricingContent() {
           flexDirection="column"
           sx={{mb: 4}}
         >
-          <TextField fullWidth id="standard-basic" label="Desired Salary" variant="standard"/>
+          <TextField fullWidth id="standard-basic" label="Desired Salary" variant="standard" onChange={handleIdealSalary}/>
         </Box>
         <Box
           display="flex"
@@ -188,13 +225,14 @@ function PricingContent() {
           <FormControl variant="standard" fullWidth>
             <InputLabel id="demo-simple-select-label">Desired Location</InputLabel>
             <Select
+              defaultValue=""
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               label="Age"
             >
-              <MenuItem value={10}>Boston</MenuItem>
-              <MenuItem value={20}>San Francisco</MenuItem>
-              <MenuItem value={30}>Philadelphia</MenuItem>
+              <MenuItem value={'Boston'}>Boston</MenuItem>
+              <MenuItem value={'San Francisco'}>San Francisco</MenuItem>
+              <MenuItem value={'Philadelphia'}>Philadelphia</MenuItem>
           </Select>
         </FormControl>
         </Box>
@@ -202,13 +240,15 @@ function PricingContent() {
           <FormControl variant="standard" fullWidth>
             <InputLabel id="demo-simple-select-label">Desired Job</InputLabel>
             <Select
+              defaultValue=""
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               label="Age"
+              onChange={handleIdealJobTitle}
             >
-              <MenuItem value={10}>Software Engineer</MenuItem>
-              <MenuItem value={20}>Software Developer</MenuItem>
-              <MenuItem value={30}>Dev Ops</MenuItem>
+              <MenuItem value={'Software Engineer'}>Software Engineer</MenuItem>
+              <MenuItem value={'Software Developer'}>Software Developer</MenuItem>
+              <MenuItem value={'Dev Ops'}>Dev Ops</MenuItem>
           </Select>
         </FormControl>
         </Box>
